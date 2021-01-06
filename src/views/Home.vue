@@ -1,18 +1,77 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
+    <h1 class="page-header" style="margin-top: 30px">Choose meme</h1>
+    <a role="button" class="btn btn-danger" href="/custom">
+        Hell no i wanna upload my template
+    </a>
+    <div v-if="memeList && !memeTemplate">
+      <div style="text-align: center">
+        <br />
+        <div class="row p-3 ml-5 mr-5">
+          <div class="col-lg-1 col-12 col-sm-2" v-for="meme in memeList"  v-bind:key="meme.id" @click.prevent="choose(meme)">
+              <img style="height:50%; width:100%" :src="meme.url">
+              <p>{{meme.name}}</p>
+          </div>
+        </div>
+        <br />
+      </div>
+    </div>
+    <div v-else-if="!memeList && memeTemplate">
+      <h2>No memes :(</h2>
+    </div>
+    <div v-else>
+      <editor :imgUrl="memeTemplate.url"></editor>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import Editor from "@/components/Editor.vue"
 
 @Component({
   components: {
-    HelloWorld
+    HelloWorld,
+    Editor
   }
+
 })
-export default class Home extends Vue {}
+
+
+export default class Home extends Vue {
+  private memeList: Array<object> = [];
+  private memeTemplate:any = false;
+  mounted() {
+    console.log(process.env);
+    
+    fetch('https://api.imgflip.com/get_memes')
+    .then(res=>res.json())
+    .then(res=>{
+      this.memeList=res.data.memes
+    }); 
+  }
+  choose(meme:any){    
+    
+    fetch(process.env.VUE_APP_URL, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      // redirect: 'follow', // manual, *follow, error
+      // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(meme) // body data type must match "Content-Type" header
+    })
+    .then(res => res.json())
+    .then(res=>{
+      console.log(res)
+      this.memeTemplate=res;
+    });
+    
+  }
+  }
 </script>
