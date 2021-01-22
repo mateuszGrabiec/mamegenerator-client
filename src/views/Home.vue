@@ -21,7 +21,7 @@
       <h2>No memes :(</h2>
     </div>
     <div v-else>
-      <editor :imgUrl="memeTemplate.url"></editor>
+      <editor :imgUrl="memeTemplate.url" :height="memeTemplate.height" :width="memeTemplate.width" :boxes="memeTemplate.box_count"></editor>
     </div>
   </div>
 </template>
@@ -43,14 +43,14 @@ import Editor from "@/components/Editor.vue"
 export default class Home extends Vue {
   private memeList: Array<object> = [];
   private memeTemplate:any = false;
-  mounted() {
-    console.log(process.env);
-    
+
+  mounted() {    
     fetch('https://api.imgflip.com/get_memes')
     .then(res=>res.json())
-    .then(res=>{
-      this.memeList=res.data.memes
-    }); 
+    .then(res=>{      
+      this.memeList=res.data.memes;
+    });
+    
   }
   choose(meme:any){    
     
@@ -68,7 +68,6 @@ export default class Home extends Vue {
     })
     .then(res => res.json())
     .then(res=>{
-      console.log(res)
       this.memeTemplate=res;
     });
     
