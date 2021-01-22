@@ -52,9 +52,13 @@ export default class Home extends Vue {
     });
     
   }
-  choose(meme:any){    
+  choose(meme:any){
+
+    console.log(process.env);
+    console.log(process.env.VUE_APP_BACKEND);
     
-    fetch(process.env.VUE_APP_URL+'/template', {
+
+    fetch(process.env.VUE_APP_BACKEND+'/template', {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

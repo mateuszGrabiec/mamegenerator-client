@@ -221,7 +221,7 @@ export default class Editor extends Vue {
     const image = ctx.toDataURL();
     console.log(image);
     //TODO check is en mus starts from VUE_APP
-    fetch(process.env.VUE_APP_URL + "/save", {
+    fetch(process.env.VUE_APP_BACKEND + "/save", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, *cors, same-origin
       // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
