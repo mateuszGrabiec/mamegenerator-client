@@ -53,12 +53,12 @@ export default class Home extends Vue {
     
   }
   choose(meme:any){
-
-    console.log(process.env);
+    
+    let endpoint = process.env.VUE_APP_BACKEND || 'http://memegenerator-server-deploy-labproj13.apps.cp4apps.cloudpak.site';
     console.log(process.env.VUE_APP_BACKEND);
     
 
-    fetch(process.env.VUE_APP_BACKEND+'/template', {
+    fetch(endpoint+'/template', {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
