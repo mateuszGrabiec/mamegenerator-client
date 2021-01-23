@@ -24,7 +24,7 @@ export default class Memes extends Vue {
     try{
       //todo change env
     let endpoint = process.env.VUE_APP_BACKEND || 'http://memegenerator-server-deploy-labproj13.apps.cp4apps.cloudpak.site';
-    const response = await (await fetch(process.env.VUE_APP_URL+'/memes')).json();    
+    const response = await (await fetch(endpoint)).json();    
     this.memeList = response;
     this.loading=false;
     }catch(err){
