@@ -220,7 +220,7 @@ export default class Editor extends Vue {
     ctx = ctx.getStage();
     const image = ctx.toDataURL();
     console.log(image);
-    let endpoint = process.env.VUE_APP_BACKEND || 'http://memegenerator-server-deploy-labproj13.apps.cp4apps.cloudpak.site';
+    const endpoint = process.env.VUE_APP_BACKEND || 'http://memegenerator-server-deploy-labproj13.apps.cp4apps.cloudpak.site';
     fetch(endpoint + "/save", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, *cors, same-origin

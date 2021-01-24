@@ -54,7 +54,7 @@ export default class Home extends Vue {
   }
   choose(meme:any){
     
-    let endpoint = process.env.VUE_APP_BACKEND || 'http://memegenerator-server-deploy-labproj13.apps.cp4apps.cloudpak.site';
+    const endpoint = process.env.VUE_APP_BACKEND || 'http://memegenerator-server-deploy-labproj13.apps.cp4apps.cloudpak.site';
     console.log(process.env.VUE_APP_BACKEND);
     
 
