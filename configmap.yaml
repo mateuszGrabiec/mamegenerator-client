@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  VUE_APP_BACKEND: http://memegenerator-server-deploy-labproj13.apps.cp4apps.cloudpak.site
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2021-01-22T18:19:08Z"
+  name: memegenerator-client-cmap
+  namespace: labproj13
+  resourceVersion: "177820896"
+  selfLink: /api/v1/namespaces/labproj13/configmaps/memegenerator-client-cmap
+  uid: 7edf0461-6ae4-4084-be88-a00d870e8ab2
